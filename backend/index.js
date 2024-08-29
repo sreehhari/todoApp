@@ -1,5 +1,5 @@
 const express = require("express");
-const {todo} = require("./db")
+const {Todo} = require("./db")
 const { createTodo, markCompleted } = require("./types");
 
 const app = express();
@@ -17,10 +17,10 @@ app.post("/todo",async function(req,res){
         })
         return;
     }
-    await todo.create({
+    await Todo.create({
         title:createPayload.title,
         description:createPayload.description,
-        completed:fale
+        completed:false
     });
     res.json({
         msg:'todo created'
@@ -29,7 +29,7 @@ app.post("/todo",async function(req,res){
 });
 
 app.get("/todos",async function(req,res){
-     const todos = await todo.find({});
+     const todos = await Todo.find({});
      res.json({
         todos
      });
@@ -40,12 +40,12 @@ app.put("/completed",async function(req,res){
     const updatePayload=req.body;
     const parsedPayload=markCompleted.safeParse(updatePayload);
     if(!parsedPayload.success){
-        res.send(411).json({
+        res.status(411).json({
             msg:"not the right inputs vro...",
         })
         return;
     }
-    await todo.update({
+    await Todo.update({
         _id:req.body.id
     },
     {
