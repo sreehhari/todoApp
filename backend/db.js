@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { boolean } = require('zod');
 
 
 mongoose.connect(import.meta.env.VITE_MONGO_URI);
