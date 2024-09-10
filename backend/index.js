@@ -31,8 +31,7 @@ app.get('/get',(req,res)=>{
 
 app.put('/update/:id',(req,res)=>{
     const {id}=req.params;
-    todoModel.findByIdAndUpdate({_id:id},{
-        done:true
-    }).then(result=>res.json(result))
+    todoModel.findByIdAndUpdate({_id:id},{done:true})
+    .then(result=>res.json(result))
     .catch(err=>res.json(err))
 })

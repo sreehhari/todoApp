@@ -10,6 +10,12 @@ function Home() {
         .then(result=>setTodo(result.data))
         .catch(err=>console.log(err))
     },[])
+    const updatetodo = (id) =>{
+        axios.put('http://localhost:3001/update/'+id)
+        .then(result=>console.log(result))
+        .catch(err=>console.log(err))
+
+    }
   return (
     
         <div className='flex flex-col items-center justify-center h-screen bg-lime-200'> 
@@ -26,7 +32,7 @@ function Home() {
                 todo.map(todo=>(
 
                     <div className='flex items-center w-80 justify-between bg-yellow-300 rounded-lg from-neutral-50 h-8 pl-1 pt-2 pr-3 pb-2 mt-1 gap-1'>
-                        <div className='flex items-center'>
+                        <div className='flex items-center' onClick={()=>updatetodo(todo._id)}>
                         <CgCheckO className='m-2' />
                         <p>{todo.task}</p>
                         </div>
